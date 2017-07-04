@@ -19,7 +19,7 @@
 			width: 15px;
 			height:300px ;
 			position:fixed;
-			right:10px;
+			right:2px;
 			top:100px;
 			border-radius:50px;
 			z-index: 9999999;
@@ -102,7 +102,7 @@ $(function(){
 
 function good(){
 	document.body.bgColor = "#000";
-	var Count_img =window.setInterval(onbn,1000);
+	var Count_img =window.setInterval(onbn,800);
 	$("#sj_p").text(a+"s");
 	var Count_down =window.setInterval(function(){
 		a--;
@@ -158,7 +158,7 @@ function onbn()
 	window.setInterval( function(){
 		var $imgobj =imgobj;
 		$imgobj.remove();
-	},1500);
+	},1000);
 	}	
 	
 	
