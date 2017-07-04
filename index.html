@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no"/>
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;;
+		}
+		body{
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+		}
+		#sj{
+			background: #D03C36;
+			width: 15px;
+			height:300px ;
+			position:fixed;
+			right:10px;
+			top:100px;
+			border-radius:50px;
+			z-index: 9999999;
+			overflow: hidden;
+		}
+		#sj1{
+			background: #FDFDFE;
+			width: 15px;
+			height:300px ;
+			border-radius:50px;
+		}
+		#sj_p{
+			width: 100%;
+			text-align: center;
+			font-size: 10px;
+			font-family: "微软雅黑";
+			/*//line-height: 300px;*/
+			position: absolute;
+			top: 50%;
+			margin-top: -11px;
+
+		}
+		#ts{
+			display: none;
+			margin: auto;
+			border-radius:20px;
+			margin: 100px auto;
+			color: #FF0033;
+			width: 100px;
+			height: 100px;
+			background: #f5f8fa;
+			text-align: center;
+			line-height: 100px;
+			opacity: 0.7;
+			font-size: 20px;
+			z-index: 99999999;
+
+		}
+		/*启示页*/
+		#kais{
+			width:100%;
+			background: #FDFDFE;
+			z-index: 99999999;
+		}
+		#kais>div{
+			width: 50%;
+			height: 50%;
+			margin:100px auto ;
+			text-align: center;
+			border-radius:20px;
+			border: 1px solid #ff0000;
+		}
+		#kais ul{
+			height: 50%;
+		}
+		#kais li{
+			list-style: none;
+			font: 14px/2 "微软雅黑";
+		}
+
+	</style>
+<script src="JQ/jquery-1.11.3.js"></script>
+<script type="text/javascript">
+$(function(){
+	//倒计时时间
+	var a = 60;
+	var data =a;
+	//点击的次数
+	b = 0;
+
+
+//获取屏幕的高度 给企启示页定高度用
+	var wd =$(window).height();
+	$("#kais").css("height",wd);
+//
+	$("#good").click(function(){
+		$("#kais").hide();
+		good()
+	});
+
+function good(){
+	document.body.bgColor = "#000";
+	var Count_img =window.setInterval(onbn,1000);
+	$("#sj_p").text(a+"s");
+	var Count_down =window.setInterval(function(){
+		a--;
+		$("#sj_p").text(a+"s");
+		if(a==0){
+			window.clearTimeout(Count_down);
+			window.clearTimeout(Count_img);
+			$("#ts").text(b).show()
+		}
+		if(a>-1){
+			var h= $("#sj").height();
+//			alert(h)
+			var c= h/data;
+//			alert(c)
+			$("#sj1").css({"height":c*a,"transition":"0.9s ease"})
+		}
+	},1000);
+}
+});
+
+function onbn()
+{	
+	var imgobj= document.createElement("img");
+	
+	//挂载到body下
+	document.body.appendChild(imgobj);
+	//增加src属性
+	if(Math.random()>=0.8){
+		imgobj.setAttribute("src","img/02.jpg");
+	}else{
+		imgobj.setAttribute("src","img/01.gif");
+	}
+
+	
+	//变量x
+	var x = kuan(100,window.innerWidth-100);
+
+	//给img加一个过度效果
+	imgobj.setAttribute("style","transition:7s ease");
+	//变量y
+	var y = kuan(100,window.innerHeight-100);
+	//增加位移效果
+	imgobj.setAttribute("style","position:absolute; left:"+x+"px; bottom:"+y+"px");
+	
+	//删除效果
+	imgobj.setAttribute("onclick","sc(this)");
+
+	//这里调用了一个函数 来设置显示图片的随机大小
+	var width = kuan(50,100);
+	imgobj.setAttribute("width",width);
+
+	//一秒后删除他自己
+	window.setInterval( function(){
+		var $imgobj =imgobj;
+		$imgobj.remove();
+	},1500);
+	}	
+	
+	
+//随机宽度函数
+function kuan(min,max)
+{
+	var shu =Math.random()*(max-min)+min;
+	
+	shu = Math.floor(shu);
+	return shu;
+	}
+//点击删除蝴蝶
+function sc(obj)
+{
+	document.body.removeChild(obj);
+	//console.log(obj.src);
+	if(obj.src=="http://localhost:63342/%E5%AE%9E%E9%AA%8C/%E9%9A%8F%E6%9C%BAIMG/img/02.jpg"){
+		if(this.b>0){
+			this.b--
+		}else {
+			this.b=0
+		}
+	}else {
+		this.b++
+	}
+
+	}
+
+
+</script>
+</head>
+
+<body>
+	<div id="kais">
+		<div >
+			<ul>
+				<li>1点击金色蝴蝶加一分</li>
+				<li>2点击红色蝴蝶减一分</li>
+			</ul>
+			<a href="#" id="good">开始</a>
+		</div>
+	</div>
+	<div id="sj"><div id="sj1"></div><p id="sj_p"></p></div>
+	<div id="ts"></div>
+
+</body>
+</html>
